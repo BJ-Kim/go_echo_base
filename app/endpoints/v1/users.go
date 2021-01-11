@@ -3,6 +3,7 @@ package v1
 import (
 	"github.com/labstack/echo/v4"
 	v1c "web_base/app/controller/v1"
+	"web_base/app/models"
 )
 
 type usersEndpoints struct {
@@ -22,7 +23,10 @@ func (ue *usersEndpoints) getUser(ctx echo.Context) error {
 }
 
 func (ue *usersEndpoints) insertUser(ctx echo.Context) error {
+	users := new(models.Users)
+	if err := ctx.Bind(users); err != nil {
+	}
 	uc := v1c.NewUsersController(&ctx)
-	uc.InsertUser()
+	uc.InsertUser(users)
 	return ctx.String(200, "Hello, World!")
 }
