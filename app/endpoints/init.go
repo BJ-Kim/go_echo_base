@@ -18,6 +18,5 @@ func (ep *endpoints) RegisterEndpoints() {
 }
 
 func (ep *endpoints) registerV1Endpoints() {
-	v1e := v1.NewV1Endpoints(ep.api)
-	v1e.Register()
+	v1.NewV1Endpoints(ep.api)
 }

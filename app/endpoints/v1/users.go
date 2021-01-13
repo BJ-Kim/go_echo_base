@@ -2,20 +2,26 @@ package v1
 
 import (
 	"github.com/labstack/echo/v4"
-	v1c "web_base/app/controller/v1"
+	"web_base/app/controller"
 	"web_base/app/models"
 )
 
 type usersEndpoints struct {
-	users *echo.Group
+	// v1Endpoints
+	controller *controller.Controller
+	users      *echo.Group
 }
 
-func newUsersEndpoints(v1 *echo.Group) {
-	ue := usersEndpoints{v1.Group("/users")}
+func newUsersEndpoints(controller *controller.Controller, v1 *echo.Group) *usersEndpoints {
+	ue := usersEndpoints{
+		controller: controller,
+		users:      v1.Group("/users"),
+	}
 	{
 		ue.users.GET("", ue.getUser)
 		ue.users.POST("", ue.insertUser)
 	}
+	return &ue
 }
 
 func (ue *usersEndpoints) getUser(ctx echo.Context) error {
@@ -26,7 +32,6 @@ func (ue *usersEndpoints) insertUser(ctx echo.Context) error {
 	users := new(models.Users)
 	if err := ctx.Bind(users); err != nil {
 	}
-	uc := v1c.NewUsersController(&ctx)
-	uc.InsertUser(users)
+	ue.controller.V1.UsersController.InsertUser(users)
 	return ctx.String(200, "Hello, World!")
 }

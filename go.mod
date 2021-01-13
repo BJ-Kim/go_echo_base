@@ -3,6 +3,8 @@ module web_base
 go 1.15
 
 require (
+	github.com/golang-migrate/migrate/v4 v4.14.1
+	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/jackc/pgproto3/v2 v2.0.7 // indirect
 	github.com/labstack/echo/v4 v4.1.17
 	golang.org/x/crypto v0.0.0-20201221181555-eec23a3978ad // indirect
