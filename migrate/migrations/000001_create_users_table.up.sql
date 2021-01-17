@@ -1,6 +1,10 @@
 CREATE TABLE IF NOT EXISTS users(
-   user_id serial PRIMARY KEY,
-   username VARCHAR (50) UNIQUE NOT NULL,
+   id serial PRIMARY KEY,
+   created_at timestamp with time zone NOT NULL default now(),
+   removed_at timestamp with time zone NULL,
+   updated_at timestamp with time zone NOT NULL default now(),
+   email VARCHAR (300) UNIQUE NOT NULL,
    password VARCHAR (50) NOT NULL,
-   email VARCHAR (300) UNIQUE NOT NULL
+   last_name VARCHAR (50) NOT NULL,
+   first_name VARCHAR (50) NOT NULL
 );
